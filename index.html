@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrepSaarthi - SSC Notes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff9933 0%, #ffffff 33%, #ffffff 66%, #138808 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 153, 51, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(19, 136, 8, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(0, 0, 139, 0.1) 0%, transparent 50%);
+      animation: backgroundFloat 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes backgroundFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(1deg); }
+      66% { transform: translateY(10px) rotate(-0.5deg); }
+    }
+
+    /* Header styles */
+    header {
+      background: linear-gradient(45deg, #ff9933, #ffffff, #138808);
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+ 
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 2rem;
+      animation: wave 3s ease-in-out infinite;
+    }
+
+    header::after {
+     
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 2rem;
+      animation: wave 3s ease-in-out infinite reverse;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(10deg); }
+      75% { transform: rotate(-10deg); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff9933, #000080, #138808);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes titleGlow {
+      0% { filter: brightness(1) drop-shadow(0 0 10px rgba(255, 153, 51, 0.3)); }
+      100% { filter: brightness(1.2) drop-shadow(0 0 20px rgba(19, 136, 8, 0.4)); }
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #333;
+      font-style: italic;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Main content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Subject cards */
+    section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 153, 51, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: slideInUp 0.8s ease-out both;
+    }
+
+    section:nth-child(even) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      border-color: #ff9933;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 153, 51, 0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    section:hover::before {
+      opacity: 1;
+      transform: rotate(45deg) translate(20px, 20px);
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #geography h2::before {
+      content: '🌍';
+      font-size: 1.5rem;
+    }
+
+    #polity h2::before {
+      content: '🏛️';
+      font-size: 1.5rem;
+    }
+
+    section p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    ul {
+      list-style: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    li {
+      margin-bottom: 0.8rem;
+    }
+
+    a {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff9933, #138808);
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    a:hover::before {
+      left: 100%;
+    }
+
+    a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(45deg, #138808, #ff9933);
+    }
+
+    /* Coming Soon sections */
+    .coming-soon {
+      opacity: 0.7;
+      position: relative;
+    }
+
+    .coming-soon::after {
+      content: 'Coming Soon!';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(45deg, #ff9933, #138808);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(45deg, #000080, #ff9933, #138808);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    footer::before {
+      content: '✨ जय हिन्द ✨';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      header {
+        padding: 1.5rem 1rem;
+      }
+
+      header::before,
+      header::after {
+        display: none;
+      }
+
+      main {
+        padding: 1rem;
+        gap: 1.5rem;
+      }
+
+      section {
+        padding: 1.5rem;
+      }
+
+      section h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      section {
+        padding: 1rem;
+      }
+
+      a {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Additional subjects placeholder */
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    /* Patriotic decorative elements */
+    .decorative-element {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .decorative-element:nth-child(1) {
+      top: 20%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .decorative-element:nth-child(2) {
+      top: 60%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .decorative-element:nth-child(3) {
+      top: 80%;
+      left: 15%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(5deg); }
+      66% { transform: translateY(10px) rotate(-3deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative elements -->
+  <div class="decorative-element">🕉️</div>
+  <div class="decorative-element">🪷</div>
+  <div class="decorative-element">⚖️</div>
+
+  <header>
+    <h1>PrepSaarthi</h1>
+    <p>आपका SSC तैयारी साथी - Your SSC Preparation Companion</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Spinning_Ashoka_Chakra.gif" style="
+    height: 5% !important;
+    width: 5%;
+">
+  </header>
+
+  <main>
+    <section id="geography">
+      <h2>Geography Notes</h2>
+      <p>भारतीय और विश्व भूगोल के नोट्स का अध्ययन करें। Explore comprehensive Indian and World Geography notes.</p>
+      <ul>
+        <li><a href="assets/geography" download>📚  Geography notes topicwise</a></li>
+      </ul>
+    </section>
+
+    <section id="polity">
+      <h2>Polity Notes</h2>
+      <p>संविधान, राष्ट्रपति, संसद और अधिक के बारे में जानें। Learn about Constitution, President, Parliament & more.</p>
+      <ul>
+        <li><a href="assets/polity" download>📜 Polity notes topicwise</a></li>
+      </ul>
+    </section>
+
+    <!-- Coming soon sections -->
+    <section id="history" class="coming-soon">
+      <h2>History Notes</h2>
+      <p>भारतीय इतिहास के महत्वपूर्ण अध्याय। Important chapters of Indian History covering ancient, medieval, and modern periods.</p>
+      <ul>
+        <li><a href="#" onclick="return false;">📚 Ancient India PDF</a></li>
+        <li><a href="#" onclick="return false;">🏰 Medieval India PDF</a></li>
+      </ul>
+    </section>
+
+    <section id="economics" class="coming-soon">
+      <h2>Economics Notes</h2>
+      <p>भारतीय अर्थव्यवस्था और आर्थिक सिद्धांत। Indian Economy and Economic principles for competitive exams.</p>
+      <ul>
+        <li><a href="#" onclick="return false;">💰 Indian Economy PDF</a></li>
+      </ul>
+    </section>
+
+    <section id="gk" class="coming-soon">
+      <h2>General Knowledge</h2>
+      <p>सामान्य ज्ञान और करंट अफेयर्स। General Knowledge and Current Affairs for SSC preparation.</p>
+      <ul>
+        <li><a href="#" onclick="return false;">🧠 GK Compendium PDF</a></li>
+      </ul>
+    </section>
+
+    <section id="reasoning" class="coming-soon">
+      <h2>Reasoning</h2>
+      <p>तर्कशक्ति और मानसिक योग्यता। Logical Reasoning and Mental Ability practice materials.</p>
+      <ul>
+        <li><a href="#" onclick="return false;">🧩 Reasoning Practice PDF</a></li>
+      </ul>
+    </section>
+
+    <section id="mathematics" class="coming-soon">
+      <h2>Mathematics</h2>
+      <p>गणित के महत्वपूर्ण टॉपिक्स। Important Mathematics topics with solved examples and practice questions.</p>
+      <ul>
+        <li><a href="#" onclick="return false;">🔢 Math Practice PDF</a></li>
+      </ul>
+    </section>
+
+    <section id="english" class="coming-soon">
+      <h2>English</h2>
+      <p>अंग्रेजी व्याकरण और समझ। English Grammar and Comprehension for competitive exams.</p>
+      <ul>
+        <li><a href="#" onclick="return false;">📖 English Grammar PDF</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PrepSaarthi. सभी अधिकार सुरक्षित - All rights reserved.</p>
+    <p style="margin-top: 10px; font-size: 0.9rem;">सफलता की ओर आपका विश्वसनीय साथी</p>
+  </footer>
+
+</body>
+</html>
