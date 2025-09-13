@@ -1,5 +1,7 @@
 # PrepSaarthi
 
+live preview - https://hydroo-dev.github.io/PrepSaarthi/
+
 **PrepSaarthi** – Your companion for SSC exam preparation. This repository contains **free SSC notes**, organized subject-wise for easy reading and downloading.
 
 ---
